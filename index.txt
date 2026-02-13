@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Yuan Deva · Portfolio</title>
+  <!-- Inter · clean, modern, fast -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 · YouTube, TikTok, puzzle, verified & extras -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- GLOBAL RESET — nothing extra ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* light — fresh, airy, transparent */
+      --bg: #f4f7fd;
+      --card-bg: #ffffff;
+      --text-primary: #1e2b3c;
+      --text-secondary: #3f5468;
+      --icon-default: #3f4e5e;
+      --icon-hover-yt: #ff0000;
+      --icon-hover-tt: #000000;
+      --shadow: 0 25px 40px -20px rgba(0,0,0,0.06);
+      --ring-shadow: 0 12px 24px -12px #4285F4;
+      --x-bg-light: transparent;
+      --x-fill-light: brightness(0);
+      --x-bg-dark: #2a303a;        /* deep gray – perfect contrast with card */
+      --x-fill-dark: brightness(0) invert(1);
+      --transition: 0.18s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .dark {
+      --bg: #0e1219;
+      --card-bg: #1a1e26;
+      --text-primary: #f0f6ff;
+      --text-secondary: #ccdcef;
+      --icon-default: #d8e2f0;
+      --icon-hover-yt: #ff6666;
+      --icon-hover-tt: #ffffff;
+      --shadow: 0 25px 40px -20px #000000b0;
+      --ring-shadow: 0 12px 24px -12px #6ea0ff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1.8rem;
+      line-height: 1.6;
+      transition: background 0.2s, color 0.2s;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    /* ---------- CARD — pristine, centered, weightless ---------- */
+    .card {
+      background: var(--card-bg);
+      border-radius: 48px;
+      padding: 3rem 2rem 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: background 0.2s, box-shadow 0.25s;
+      position: relative;
+    }
+
+    /* ---------- THEME TOGGLE — invisible until hover, instant ---------- */
+    #theme-toggle {
+      position: absolute;
+      top: 1.8rem;
+      right: 2rem;
+      background: transparent;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.2s;
+      background: var(--card-bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    #theme-toggle:hover {
+      background: var(--bg);
+      transform: scale(0.94);
+    }
+
+    /* ---------- GOOGLE 4‑COLOR RING — vibrant, thick, smooth ---------- */
+    .profile-ring {
+      display: inline-block;
+      padding: 10px;
+      background: conic-gradient(
+        from 0deg,
+        #EA4335 0deg 90deg,
+        #FBBC05 90deg 180deg,
+        #34A853 180deg 270deg,
+        #4285F4 270deg 360deg
+      );
+      border-radius: 50%;
+      margin-bottom: 1.8rem;
+      box-shadow: var(--ring-shadow);
+      transition: transform var(--transition);
+    }
+    .profile-ring:hover {
+      transform: scale(1.01);
+    }
+
+    .profile-pic {
+      display: block;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--card-bg);
+      background: #eef2f6;
+    }
+
+    /* ---------- NAME & BIO — calm, readable ---------- */
+    .name-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 0.2rem;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .verified-badge {
+      color: #1DA1F2; /* Twitter blue */
+      font-size: 2rem;
+      margin-top: 8px;
+    }
+
+    .bio {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0.4rem 0 1.8rem;
+      font-weight: 400;
+    }
+
+    /* ---------- SECTION TITLE — Follow Social Media (centered, subtle) ---------- */
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+      opacity: 0.8;
+    }
+
+    /* ---------- SOCIAL ROW — only YouTube, TikTok, X ---------- */
+    .social-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.2rem;
+      margin: 0 0 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    /* base icon link — no background, no borders, no outlines */
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      text-decoration: none;
+      color: var(--icon-default);
+      transition: transform var(--transition);
+    }
+
+    .social-link i {
+      font-size: 2.5rem;
+      transition: color 0.2s, transform 0.15s;
+    }
+
+    /* YouTube & TikTok hover — brand colors, pure */
+    .social-link:hover i {
+      transform: scale(1.12);
+    }
+    .social-link:hover .fa-youtube {
+      color: #ff0000;
+    }
+    .social-link:hover .fa-tiktok {
+      color: #000000;
+      text-shadow: 2px 2px 0 #25F4EE, -2px -2px 0 #FE2C55;
+    }
+    .dark .social-link:hover .fa-tiktok {
+      color: #ffffff;
+      text-shadow: 2px 2px 0 #25F4EE, -2px -2px 0 #FE2C55;
+    }
+
+    /* ---------- X LOGO — dark theme: white X, dark gray circle (contrast) ---------- */
+    .x-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      text-decoration: none;
+      border-radius: 50%;
+      transition: transform var(--transition), background 0.2s;
+    }
+
+    .x-link img {
+      width: 32px;
+      height: 32px;
+      transition: transform 0.15s;
+    }
+
+    /* light theme: black X, no background */
+    .x-link {
+      background: transparent;
+    }
+    .x-link img {
+      filter: brightness(0);
+    }
+
+    /* dark theme: white X, dark gray circle – perfect contrast */
+    .dark .x-link {
+      background: #2a303a;
+    }
+    .dark .x-link img {
+      filter: brightness(0) invert(1);
+    }
+
+    .x-link:hover {
+      transform: scale(1.08);
+    }
+
+    /* ---------- CONTACT SECTION — Gmail & WhatsApp ---------- */
+    .contact-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 1rem 0 0.8rem 0;
+      opacity: 0.85;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      text-decoration: none;
+      transition: transform var(--transition);
+    }
+
+    .contact-link img {
+      width: 34px;
+      height: 34px;
+      transition: transform 0.15s;
+    }
+
+    .contact-link:hover img {
+      transform: scale(1.12);
+    }
+
+    /* ---------- HIGHLIGHTS GRID — 4 items in 2x2 (achievements, missions, quote, spotify) ---------- */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2rem;
+      margin-top: 2.2rem;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .highlight-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.4rem;
+      transition: transform var(--transition);
+    }
+
+    .highlight-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .highlight-item i {
+      font-size: 2rem;
+      color: var(--icon-default);
+      transition: color 0.2s;
+    }
+
+    .highlight-item:hover i {
+      color: #4285F4; /* Google blue on hover for consistency */
+    }
+
+    .highlight-item span {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      line-height: 1.4;
+      max-width: 140px;
+    }
+
+    /* for spotify, we use the same style but with a special hover color if desired */
+    .highlight-item .fa-spotify:hover {
+      color: #1DB954;
+    }
+
+    /* adjust for dark mode */
+    .dark .highlight-item i {
+      color: var(--icon-default);
+    }
+
+    /* ---------- FOOTER — © 2026 AzyTeam for best Portfolio + links ---------- */
+    .footer {
+      margin-top: 2.5rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer::before {
+      content: '';
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, #EA4335, #FBBC05, #34A853, #4285F4);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      opacity: 0.3;
+      transition: opacity 0.2s, width 0.2s;
+    }
+
+    .footer:hover::before {
+      opacity: 0.8;
+      width: 120px;
+    }
+
+    .footer p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      opacity: 0.6;
+      letter-spacing: 1px;
+      transition: opacity 0.2s;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer:hover p {
+      opacity: 1;
+    }
+
+    /* footer links */
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer:hover .footer-links {
+      opacity: 1;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #4285F4;
+    }
+
+    .footer-links span.separator {
+      color: var(--text-secondary);
+      opacity: 0.4;
+    }
+
+    /* ---------- NO EXTRA DECORATIONS, NO LINES ---------- */
+    hr, .separator {
+      display: none;
+    }
+
+    /* ---------- LIGHTNING FAST PUZZLE LOADER — fades in 250ms, zero weight ---------- */
+    #puzzle-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .loader-content i {
+      font-size: 3.2rem;
+      color: #4285F4;
+      animation: spin 0.5s infinite linear;
+    }
+    .loader-content p {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ---------- RESPONSIVE — perfect on any screen ---------- */
+    @media (max-width: 500px) {
+      .card { padding: 2.2rem 1.6rem 1.5rem; }
+      .name-container { gap: 6px; }
+      h1 { font-size: 2.2rem; }
+      .verified-badge { font-size: 1.6rem; margin-top: 4px; }
+      .profile-pic { width: 140px; height: 140px; }
+      .social-row { gap: 1.4rem; }
+      .contact-row { gap: 1.4rem; }
+      .social-link, .x-link, .contact-link { width: 50px; height: 50px; }
+      .social-link i { font-size: 2.2rem; }
+      .x-link img { width: 28px; height: 28px; }
+      .contact-link img { width: 30px; height: 30px; }
+      #theme-toggle { top: 1.2rem; right: 1.2rem; }
+      .section-title { font-size: 0.85rem; letter-spacing: 3px; }
+      .contact-title { font-size: 0.85rem; letter-spacing: 2.5px; margin: 0.8rem 0 0.5rem; }
+      .highlights-grid {
+        gap: 1rem;
+        margin-top: 1.8rem;
+      }
+      .highlight-item i { font-size: 1.8rem; }
+      .highlight-item span { font-size: 0.8rem; }
+      .footer { margin-top: 2rem; }
+      .footer::before { width: 60px; }
+      .footer:hover::before { width: 100px; }
+      .footer-links { gap: 0.8rem; font-size: 0.7rem; }
+    }
+
+    /* focus visibility — accessible, minimal */
+    .social-link:focus-visible, .x-link:focus-visible, .contact-link:focus-visible, #theme-toggle:focus-visible, .footer-links a:focus-visible {
+      outline: 2px solid #4285F4;
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🧩 PUZZLE LOADER — vanishes in 250ms, super smooth -->
+  <div id="puzzle-loader">
+    <div class="loader-content">
+      <i class="fas fa-puzzle-piece"></i>
+      <p>loading · · ·</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card" style="position: relative;">
+
+      <!-- theme toggle — remembers your preference, instant feedback -->
+      <button id="theme-toggle" aria-label="Switch theme">
+        <i class="fas fa-moon"></i>
+      </button>
+
+      <!-- profile with Google 4-color ring (red, yellow, green, blue) -->
+      <div class="profile-ring">
+        <img class="profile-pic" src="foto.png" alt="Yuan Deva profile" 
+             onerror="this.onerror=null; this.src='https://i.pravatar.cc/400?u=' + Date.now();">
+      </div>
+
+      <!-- name & verified badge -->
+      <div class="name-container">
+        <h1>Yuan Deva</h1>
+        <i class="fas fa-check-circle verified-badge"></i>
+      </div>
+
+      <!-- bio about rockets & space (English) -->
+      <p class="bio">
+        🚀 Rocket enthusiast · space explorer<br>Always curious about what's beyond the sky.
+      </p>
+
+      <!-- 📱 FOLLOW SOCIAL MEDIA — centered, elegant -->
+      <div class="section-title">FOLLOW SOCIAL MEDIA</div>
+
+      <!-- social row: YouTube, TikTok, X -->
+      <div class="social-row">
+        <a href="https://www.youtube.com/@Yuan-m2r" class="social-link" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://tiktok.com/@1like_space" class="social-link" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://x.com/Yuan_SF24983" class="x-link" aria-label="X">
+          <img src="https://cdn.simpleicons.org/x" alt="X logo" width="32" height="32">
+        </a>
+      </div>
+
+      <!-- 💬 CHAT VIA GMAIL & WHATSAPP -->
+      <div class="contact-title">CHAT WITH ME</div>
+      <div class="contact-row">
+        <!-- Gmail -->
+        <a href="mailto:email.yuandevarizqullah12@gmail.com" class="contact-link" aria-label="Gmail">
+          <img src="https://cdn.simpleicons.org/gmail" alt="Gmail" width="34" height="34">
+        </a>
+        <!-- WhatsApp - ganti nomor dengan format internasional (tanpa +) -->
+        <a href="https://wa.me/6281234567890" class="contact-link" aria-label="WhatsApp">
+          <img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp" width="34" height="34">
+        </a>
+      </div>
+
+      <!-- ✨ HIGHLIGHTS GRID: achievements, missions, quote, spotify -->
+      <div class="highlights-grid">
+        <!-- Achievements / certifications -->
+        <div class="highlight-item">
+          <i class="fas fa-trophy"></i>
+          <span>NASA InOMN 2025</span>
+        </div>
+        <!-- Favorite space missions -->
+        <div class="highlight-item">
+          <i class="fas fa-rocket"></i>
+          <span>STS-114 · JWST · Artemis II</span>
+        </div>
+        <!-- Favorite quote -->
+        <div class="highlight-item">
+          <i class="fas fa-quote-right"></i>
+          <span>"The sky is not the limit."</span>
+        </div>
+        <!-- Currently listening on Spotify -->
+        <div class="highlight-item">
+          <i class="fab fa-spotify"></i>
+          <span>Closer · The Chainsmokers</span>
+        </div>
+      </div>
+
+      <!-- 🏷️ FOOTER — © 2026 AzyTeam for best Portfolio + links -->
+      <div class="footer">
+        <p>© 2026 AzyTeam for best Portfolio</p>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <span class="separator">·</span>
+          <a href="/tos.html">Terms of Service</a>
+          <span class="separator">·</span>
+          <a href="/index.txt" download>Template</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ---------- 🧩 SUPER FAST PUZZLE LOADER — fades out in 250ms ----------
+      const loader = document.getElementById('puzzle-loader');
+      if (loader) {
+        const removeLoader = () => {
+          loader.style.opacity = '0';
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 240);
+        };
+        if (document.readyState === 'complete') {
+          setTimeout(removeLoader, 180);
+        } else {
+          window.addEventListener('load', () => {
+            setTimeout(removeLoader, 180);
+          });
+        }
+      }
+
+      // ---------- DARK/LIGHT TOGGLE with localStorage ----------
+      const toggle = document.getElementById('theme-toggle');
+      const icon = toggle.querySelector('i');
+      const body = document.body;
+
+      const saved = localStorage.getItem('portfolio-v3');
+      if (saved === 'dark') {
+        body.classList.add('dark');
+        icon.className = 'fas fa-sun';
+      } else {
+        body.classList.remove('dark');
+        icon.className = 'fas fa-moon';
+      }
+
+      toggle.addEventListener('click', () => {
+        if (body.classList.contains('dark')) {
+          body.classList.remove('dark');
+          icon.className = 'fas fa-moon';
+          localStorage.setItem('portfolio-v3', 'light');
+        } else {
+          body.classList.add('dark');
+          icon.className = 'fas fa-sun';
+          localStorage.setItem('portfolio-v3', 'dark');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
